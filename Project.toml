@@ -4,12 +4,19 @@ authors = ["Tamás Cserteg <csertegt@gmail.com>"]
 version = "0.1.0"
 
 [deps]
+FileIO = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
+Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
+MeshIO = "7269a6da-0436-5bbc-96c2-40638cbb6118"
+RANSAC = "d6bc97e0-a563-11e9-1861-c573f65f3bc3"
+RANSACVisualizer = "d8b64869-c60f-5359-ae4c-f9741940db4e"
+Remark = "79b45036-8e38-5d04-8f49-b9fb23ff5a0d"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+
+[compat]
+julia = "^1"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
 test = ["Test"]
-
-[compat]
-julia = "^1"
