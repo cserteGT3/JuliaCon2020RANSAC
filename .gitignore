@@ -3,3 +3,7 @@
 *.jl.mem
 /deps/deps.jl
 /docs/build
+
+# slides build
+/slides/build
+/slides/src
