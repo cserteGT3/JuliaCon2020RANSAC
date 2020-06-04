@@ -1,0 +1,15 @@
+name = "JuliaCon2020RANSAC"
+uuid = "27c4038b-5bc6-4584-8d0a-aeed953779f6"
+authors = ["Tamás Cserteg <csertegt@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
+
+[compat]
+julia = "^1"
