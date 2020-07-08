@@ -80,7 +80,7 @@ Base.show(io::IO, ::MIME"text/plain", x::FittedTranslational) =
 Base.show(io::IO, ::MIME"text/plain", x::ExtractedTranslational) =
     print(io, """ExtractedTranslational""")
 
-strt(x::AbstractTranslationalSurface) = "translational"
+RANSAC.strt(x::AbstractTranslationalSurface) = "translational"
 
 function transldir(p, n, params)
     # 1. van-e közös merőleges? nincs -> break
@@ -312,7 +312,7 @@ function RANSAC.fit(::Type{FittedTranslational}, p, n, pcr, params)
     sbs = pcr.subsets[subsnum]
     # index in isenabled with the subset, to get those who are enabled in the subset
     # then use it to index into the subset
-    used_i = sbs[ien[sbs]]
+    used_i = @view sbs[ien[sbs]]
     projected, proj_ind = project2sketchplane(pcr, used_i, coordframe, params)
     size(projected, 1) < 2 && return retnot("No compatible points to transl. direction.")
 
@@ -432,7 +432,7 @@ function RANSAC.refit(s::FittedTranslational, pc, params)
 
     cf = s.coordframe
     cidxs = s.contourindexes
-
+    println("cidxs size: $(length(cidxs))")
     # 1. project points & normals
     old_p = @view pc.vertices[cidxs]
     o_pp = project2sketchplane(old_p, cf)
