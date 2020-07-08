@@ -318,31 +318,7 @@ function RANSAC.fit(::Type{FittedTranslational}, p, n, pcr, params)
     projected, proj_ind = project2sketchplane(pcr, used_i, coordframe, params)
     size(projected, 1) < 2 && return retnot("No compatible points to transl. direction.")
 
-    #=
-    aabb = findAABB(projected)
-    sidelength = aabb[2]-aabb[1]
-    sidelength[1] < 0.02*sidelength[2] && return retnot("Bad: sidelength[1] < 0.01*sidelength[2]")
-    sidelength[2] < 0.02*sidelength[1] && return retnot("Bad: sidelength[2] < 0.01*sidelength[1]")
-    =#
-    # 5. filter out points that are close to each other
-    # for both the indexes and both the points
-    #filtermultipoint!(projected, proj_ind, params)
-
-    # 6. összefüggő kontúrok
-    #thr = ϵ
-    #maxit = max_contour_it
-
     spatchs = segmentpatches(projected, ϵ)
-    #@infiltrate
-    #=
-    while spatchs.groups > max_group_num
-        maxit < 1 && return retnot("Can't make max_group_num contours in max_contour_it. N of contours: $(spatchs.groups)")
-        maxit -= 1
-        thr = 1.01*thr
-        spatchs = segmentpatches(projected, thr)
-        #spatchs.groups <= max_group_num && break
-    end
-    =#
     # hereby spatchs should contain maximum max_group_num of patches
     fitresults = Array{FittedTranslational,1}(undef, 0)
     @logmsg IterLow1 "Nof groups: $(spatchs.groups)"
@@ -358,23 +334,8 @@ function RANSAC.fit(::Type{FittedTranslational}, p, n, pcr, params)
         #size(patch_indexes, 1) < τ/size(pcr.subsets,1) && continue
         #@logmsg IterLow1 "Nof contour points: $(length(patch_indexes))"
 
-        #=
-        ppp = @view projected[cur_group]
-        aabb = findAABB(ppp)
-        sidelength = aabb[2]-aabb[1]
-        sidelength[1] < 0.02*sidelength[2] && continue
-        sidelength[2] < 0.02*sidelength[1] && continue
-        cent = centroid(ppp)
-        mavc = aabb[2]-cent
-        mavc[1] < 0.02*mavc[2] && continue
-        mavc[2] < 0.02*mavc[1] && continue
-        # discard diagonal too
-        =#
-
         # 4. OOBB
         # don't extract planes
-        #TODO: azt kéne inkább nézni, hogy az egyik oldal nagyon kicsi a másikhoz képest=sík
-        # if one of the side's length is <<< then the other -> nothing
         ppp = @view pcr.vertices[patch_indexes]
         goodside, sidel = checksides(ppp, params)
         if !goodside
@@ -408,17 +369,6 @@ function compatiblesTranslational(shape, points, normals, params)
 
     calcs = (dn2shape_contour(p, shape) for p in ps)
 
-    #=
-    #eps check
-    c1 = [abs(calcs[i][1]) < ϵ for i in eachindex(points)]
-    #alpha check
-    c2 = Vector{Bool}(undef, size(points))
-    for i in eachindex(c2)
-        #comp_n = contournormal(shape, calcs[i][2])
-        comp_n = calcs[i][2]
-        c2[i] = RANSAC.isparallel(comp_n, ns[i], α)
-    end
-    =#
     zpn = zip(calcs, ns)
     c = [(abs(cc[1]) < ϵ) && RANSAC.isparallel(cc[2], ni, α) for (cc,ni) in zpn]
     return c
@@ -451,10 +401,6 @@ function RANSAC.refit(s::FittedTranslational, pc, params)
         thinned, _ = thinning(o_pp, thinning_par)
     elseif thin_method === :slow
         thinned, _ = thinning_slow(o_pp, thinning_par)
-    elseif thin_method === :vordel
-        # use the VoronoiDelaunay package
-        #thinned, _ = thinning_deldir(o_pp, thinning_par)
-        error("not implemented yet!")
     else
         error("thin method: $(thin_method) is not implemented!")
     end
