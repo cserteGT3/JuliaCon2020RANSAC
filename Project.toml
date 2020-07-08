@@ -4,6 +4,7 @@ authors = ["Tamás Cserteg <csertegt@gmail.com>"]
 version = "0.1.0"
 
 [deps]
+ColorSchemes = "35d6a980-a343-548e-a6ea-1d62b119f2f4"
 ExtractMacro = "f86d3d12-fd5b-522c-99e9-61577282a1e9"
 FileIO = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"

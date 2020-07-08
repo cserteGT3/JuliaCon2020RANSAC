@@ -3,6 +3,8 @@ module JuliaCon2020RANSAC
 import Remark
 import RANSAC
 using RANSAC: IterLow1
+import RANSACVisualizer
+using ColorSchemes
 
 using Logging
 using LinearAlgebra

@@ -82,6 +82,8 @@ Base.show(io::IO, ::MIME"text/plain", x::ExtractedTranslational) =
 
 RANSAC.strt(x::AbstractTranslationalSurface) = "translational"
 
+RANSACVisualizer.getcolour(s::AbstractTranslationalSurface) = get(colorschemes[:seaborn_bright], 0.4)
+
 function transldir(p, n, params)
     # 1. van-e közös merőleges? nincs -> break
     #@unpack α_perpend = params
@@ -351,7 +353,9 @@ function RANSAC.fit(::Type{FittedTranslational}, p, n, pcr, params)
         size(cur_group,1) < 3 && continue
         patch_indexes = proj_ind[cur_group]
         # only extract contours that contain at least the minimumsize number of points
-        size(patch_indexes, 1) < τ/size(pcr.subsets,1) && continue
+        size(patch_indexes, 1) < τ && continue
+        #original:
+        #size(patch_indexes, 1) < τ/size(pcr.subsets,1) && continue
         #@logmsg IterLow1 "Nof contour points: $(length(patch_indexes))"
 
         #=
@@ -432,7 +436,6 @@ function RANSAC.refit(s::FittedTranslational, pc, params)
 
     cf = s.coordframe
     cidxs = s.contourindexes
-    println("cidxs size: $(length(cidxs))")
     # 1. project points & normals
     old_p = @view pc.vertices[cidxs]
     o_pp = project2sketchplane(old_p, cf)

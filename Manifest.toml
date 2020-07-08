@@ -673,7 +673,7 @@ version = "0.5.1"
 
 [[RANSACVisualizer]]
 deps = ["AbstractPlotting", "ColorSchemes", "GeometryTypes", "LinearAlgebra", "Makie", "RANSAC", "StaticArrays"]
-git-tree-sha1 = "c75d1d74a55cdba5c6b3c3363336bab286fb70d2"
+git-tree-sha1 = "1a026d1b1f670760f3d658ee95705d15eda63cee"
 repo-rev = "master"
 repo-url = "https://github.com/cserteGT3/RANSACVisualizer.jl"
 uuid = "d8b64869-c60f-5359-ae4c-f9741940db4e"
