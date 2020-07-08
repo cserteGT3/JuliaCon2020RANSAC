@@ -4,15 +4,22 @@ authors = ["Tamás Cserteg <csertegt@gmail.com>"]
 version = "0.1.0"
 
 [deps]
+ExtractMacro = "f86d3d12-fd5b-522c-99e9-61577282a1e9"
 FileIO = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Logging = "56ddb016-857b-54e1-b83d-db4d58db5568"
 Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
 MeshIO = "7269a6da-0436-5bbc-96c2-40638cbb6118"
+NearestNeighbors = "b8a86587-4115-5ab1-83bc-aa920d37bbce"
 RANSAC = "d6bc97e0-a563-11e9-1861-c573f65f3bc3"
 RANSACVisualizer = "d8b64869-c60f-5359-ae4c-f9741940db4e"
 Remark = "79b45036-8e38-5d04-8f49-b9fb23ff5a0d"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+UnionFind = "99c6138d-4661-531e-8606-19bf1ec96588"
+VoronoiDelaunay = "72f80fcb-8c52-57d9-aff0-40c1a3526986"
 
 [compat]
+RANSAC = "0.5.1"
 julia = "^1"
 
 [extras]
