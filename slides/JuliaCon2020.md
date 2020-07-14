@@ -155,3 +155,65 @@ Result:
     ]
 }
 ```
+
+---
+
+# Extensibility
+
+- `MyShape <: FittedShape`
+- `fit()`
+- `score()`
+- `refit()`
+
+--
+
+- `defaultshapeparameters()`
+
+---
+
+# Extensibility demo
+
+## Parameters
+
+```julia
+julia> p = ransacparameters([FittedPlane])
+(iteration = (drawN = 3, minsubsetN = 15, prob_det = 0.9, shape_types = UnionAll[FittedPlane], τ = 900,
+itermax = 1000, extract_s = :nofminset, terminate_s = :nofminset),
+common = (collin_threshold = 0.2, parallelthrdeg = 1.0), plane = (ϵ = 0.3, α = 0.08726646259971647))
+
+julia> p = ransacparameters(p, iteration=(prob_det=0.99,))
+(iteration = (drawN = 3, minsubsetN = 15, prob_det = 0.99, shape_types = UnionAll[FittedPlane], τ = 900,
+itermax = 1000, extract_s = :nofminset, terminate_s = :nofminset),
+common = (collin_threshold = 0.2, parallelthrdeg = 1.0), plane = (ϵ = 0.3, α = 0.08726646259971647))
+
+julia> p = ransacparameters(p, plane=(ϵ=1,))
+(iteration = (drawN = 3, minsubsetN = 15, prob_det = 0.99, shape_types = UnionAll[FittedPlane], τ = 900,
+itermax = 1000, extract_s = :nofminset, terminate_s = :nofminset),
+common = (collin_threshold = 0.2, parallelthrdeg = 1.0), plane = (ϵ = 1, α = 0.08726646259971647))
+```
+
+---
+
+# Extensibility demo
+
+## Translational surface
+
+TODO:
+- pic1
+- pic2
+
+---
+
+# Future plans
+
+- update to GeometryBasics.jl (RANSACVisualizer.jl)
+- performance optmizations
+- investigate further RANSAC variants (GlobFit, multiBaySAC, etc.)
+
+---
+
+class: middle, center
+
+count: false
+
+# Thank you for your attention!
