@@ -158,3 +158,8 @@ function dn2shape_contour(point, shape)
     signi = dotp < 0 ? -1 : 1
     return (signi*d, pn, i)
 end
+
+function centroid(points)
+    com = sum(points)
+    return com/size(points, 1)
+end
