@@ -63,7 +63,9 @@ using RANSACVisualizer
 showgeometry(m.position, m.normals)
 ```
 
-.center[<img src="https://csertegt3.github.io/RANSAC.jl/dev/img/showgeometry.png" width="400">]
+.center[<img src="https://csertegt3.github.io/RANSAC.jl/stable/img/showgeometry.png" width="400">]
+
+.left[.footnote[[Demo source](https://csertegt3.github.io/RANSAC.jl/stable/example/)]]
 
 ---
 
@@ -97,13 +99,13 @@ sphere = (ϵ = 0.05, α = 0.17453292519943295, sphere_par = 0.02))
 # Demo
 
 ```julia
-extr, _ = ransac(pc, p, true, reset_rand=true)
+extr, _ = ransac(pc, p, true)
 ```
 
 Result:
 
 ```julia
-23-element Array{ExtractedShape,1}:
+24-element Array{ExtractedShape,1}:
  Cand: (plane), 2205 ps
  Cand: (cylinder, R: 1.101515), 738 ps
  Cand: (cylinder, R: 2.2075706), 625 ps
@@ -116,3 +118,40 @@ Result:
 ---
 
 # Demo
+
+```julia
+showbytype(pc, extr; show_axis = false)
+```
+
+.center[<img src="https://csertegt3.github.io/RANSAC.jl/stable/img/bytype.png" width="400">]
+
+---
+
+# Demo
+
+```julia
+exportJSON(stdout, extr, 2)
+```
+
+Result:
+
+```json
+{
+  "primitives": [
+    {
+      "point": [
+        1.953041,
+        -2.0e-6,
+        -13.371634
+      ],
+      "normal": [
+        -0.0,
+        1.0,
+        -0.0
+      ],
+      "type": "plane"
+    },
+    ⋮
+    ]
+}
+```
