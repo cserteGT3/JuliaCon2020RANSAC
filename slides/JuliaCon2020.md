@@ -34,9 +34,9 @@ GitHub:  cserteGT3
 ---
 # Digital shape reconstruction
 
-.center[<img src="https://www.laserdesign.com/wp-content/uploads/2014/10/ct-process.png" width="450">]
+.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/General-RE-framework.png" width="550">]
 
-.left[.footnote[[Image source](https://www.laserdesign.com/wp-content/uploads/2014/10/ct-process.png)]]
+.left[.footnote[[Image source](https://www.researchgate.net/publication/321116176_Reverse_engineering_modeling_methods_and_tools_a_survey)]]
 
 ---
 
@@ -188,10 +188,11 @@ julia> p = ransacparameters(p, iteration=(prob_det=0.99,))
 itermax = 1000, extract_s = :nofminset, terminate_s = :nofminset),
 common = (collin_threshold = 0.2, parallelthrdeg = 1.0), plane = (ϵ = 0.3, α = 0.08726646259971647))
 
-julia> p = ransacparameters(p, plane=(ϵ=1,))
-(iteration = (drawN = 3, minsubsetN = 15, prob_det = 0.99, shape_types = UnionAll[FittedPlane], τ = 900,
-itermax = 1000, extract_s = :nofminset, terminate_s = :nofminset),
-common = (collin_threshold = 0.2, parallelthrdeg = 1.0), plane = (ϵ = 1, α = 0.08726646259971647))
+julia> p = ransacparameters(p, plane=(ϵ=1,), newshape=(ϵ=0.01, param1="typeA", param2=42,))
+(iteration = (drawN = 3, minsubsetN = 15, prob_det = 0.99, shape_types = UnionAll[FittedPlane],
+τ = 900, itermax = 1000, extract_s = :nofminset, terminate_s = :nofminset),
+common = (collin_threshold = 0.2, parallelthrdeg = 1.0), plane = (ϵ = 1, α = 0.08726646259971647),
+newshape = (ϵ = 0.01, param1 = "typeA", param2 = 42))
 ```
 
 ---
