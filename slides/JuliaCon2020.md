@@ -3,16 +3,17 @@ class: middle, center
 count: false
 
 # Efficient RANSAC in efficient Julia
+
+
 ---
 
 # Introduction
 
 .left[
-[Tamás Cserteg](https://www.sztaki.hu/en/tamas-cserteg)]
+[Tamás Cserteg](https://www.sztaki.hu/en/tamas-cserteg)
 
---
 
-.left[
+
 Research Laboratory on Engineering & Management Intelligence
 
 Institute for Computer Science and Control (SZTAKI) - Budapest, Hungary
@@ -58,7 +59,7 @@ GitHub:  cserteGT3
 
 ```julia
 using FileIO
-m = load("../fandisk_input.obj");
+m = load("fandisk_input.obj");
 using RANSACVisualizer
 showgeometry(m.position, m.normals)
 ```
@@ -198,15 +199,21 @@ common = (collin_threshold = 0.2, parallelthrdeg = 1.0), plane = (ϵ = 1, α = 0
 
 ## Translational surface
 
-TODO:
-- pic1
-- pic2
+.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/m5_combined.png" width="600">]
+
+---
+
+# Extensibility demo
+
+## Translational surface
+
+.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/transl_comparison.png" width="700">]
 
 ---
 
 # Future plans
 
-- update to GeometryBasics.jl (RANSACVisualizer.jl)
+- proper API in RANSACVisualizer.jl
 - performance optmizations
 - investigate further RANSAC variants (GlobFit, multiBaySAC, etc.)
 
