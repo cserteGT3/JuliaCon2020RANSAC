@@ -330,7 +330,7 @@ Here you can see an object whose outer surface is defined by an extruded contour
 
 ### Translational surface
 
-.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/transl_comparison.png" width="700">]
+.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/transl_comparison2.png" width="700">]
 
 ???
 If we run the RANSAC algorithm on it, we get the followings:
@@ -344,7 +344,7 @@ count: false
 
 ### Translational surface
 
-.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/transl_comparison2.png" width="700">]
+.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/transl_comparison.png" width="700">]
 
 ???
 However using the new primitive, the whole object can be described, and we also need less primitives.
