@@ -261,7 +261,7 @@ One must also implement the default shape parameters function to supply the para
 
 # Extensibility demo
 
-## Parameters
+### Parameters
 
 ???
 As in any scientific computing task, we need parameters, thresholds, etc. to fine tune the algorithm.
@@ -269,7 +269,7 @@ As in any scientific computing task, we need parameters, thresholds, etc. to fin
 --
 
 ```julia
-julia> using RANSAC
+julia> using RANSAC, UnPack
 
 julia> p = ransacparameters([FittedPlane])
 (iteration = (drawN = 3, minsubsetN = 15, prob_det = 0.9, shape_types = UnionAll[FittedPlane], τ = 900,
@@ -286,6 +286,11 @@ julia> p = ransacparameters(p, newshape=(ϵ=0.01, param1="typeA", param2=42,))
 itermax = 1000, extract_s = :nofminset, terminate_s = :nofminset),
 common = (collin_threshold = 0.2, parallelthrdeg = 1), plane = (ϵ = 0.3, α = 0.0873),
 newshape = (ϵ = 0.01, param1 = "typeA", param2 = 42))
+
+julia> @unpack newshape = p;
+
+julia> newshape
+(ϵ = 0.01, param1 = "typeA", param2 = 42)
 ```
 
 ???
@@ -301,7 +306,7 @@ You can also easily extend it with new parameters, if you introduce a new shape 
 
 # Extensibility demo
 
-## Translational surface
+### Translational surface
 
 ???
 But why do we want to add a new primitive?
@@ -323,7 +328,7 @@ Here you can see an object whose outer surface is defined by an extruded contour
 
 # Extensibility demo
 
-## Translational surface
+### Translational surface
 
 .center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/transl_comparison.png" width="700">]
 
@@ -332,16 +337,21 @@ If we run the RANSAC algorithm on it, we get the followings:
 
 On the left side I didn’t use the new translational primitive, and you can see that we couldn’t recognize this wave shape in the front of the object.
 
+---
+count: false
+
+# Extensibility demo
+
+### Translational surface
+
+.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/transl_comparison2.png" width="700">]
+
+???
 However using the new primitive, the whole object can be described, and we also need less primitives.
 
 ---
 
 # Future plans
-
-???
-And finally a few words of what I am planning for the future:
-
---
 
 - Torus primitive
 - Proper API in `RANSACVisualizer.jl`
@@ -350,11 +360,28 @@ And finally a few words of what I am planning for the future:
 - Investigate further RANSAC variants (GlobFit, multiBaySAC, etc.)
 
 ???
+And finally a few words of what I am planning for the future:
+
 The torus primitive is still not implemented, and a proper API is needed for the RANSACVisualizer package
 
 I need to make couple changes to further optimise speed including multi-threading, if possible.
 
 Long term plan is to investigate further RANSAC variants if they could be incorporated into this package.
+
+---
+
+# Summary
+
+- Easy to use primitive recognition in 3D point clouds
+- Flexbile tool for production and research
+- Written in pure Julia
+
+???
+To conclude: with the efficient RANSAC algorithm one can easily recognize primitive shapes in 3d point clouds.
+
+The RANSAC.jl package is a flexible tool for production and also for scientific exploration.
+
+And it is written in pure Julia.
 
 ---
 
@@ -365,10 +392,4 @@ count: false
 # Thank you for your attention!
 
 ???
-To conclude: with the efficient RANSAC algorithm one can easily recognize primitive shapes in 3d point clouds.
-
-The RANSAC.jl package is a flexible tool for production and also for scientific exploration.
-
-And it is written in pure Julia.
-
 Thank you for your attention!

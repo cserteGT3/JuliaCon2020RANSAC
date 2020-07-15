@@ -22,7 +22,7 @@ params = ransacparameters(defpars, iteration=iterp, plane=planep, sphere=spherep
 
 extr2, t = ransac(pc, params, true; reset_rand=true)
 showshapes(pc, extr2, show_axis = false)
-sc = showbytype(pc, extr2, show_axis = false)
+sc = showbytype(pc, extr2, show_axis = false, resolution=(1920,1080))
 sc.center = false
 save("no_transl.png", sc)
 
@@ -35,6 +35,6 @@ params = ransacparameters(defpars, iteration=iterp, plane=planep, sphere=spherep
 extr, t = ransac(pc, params, true; reset_rand=true)
 
 showshapes(pc, extr)
-sc2 = showbytype(pc, extr, show_axis = false)
+sc2 = showbytype(pc, extr, show_axis = false, resolution=(1920,1080))
 sc2.center = false
 save("transl.png", sc2)
