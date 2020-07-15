@@ -1,9 +1,10 @@
-class: middle, center
+class: center, bottom
 
 count: false
 
-# Efficient RANSAC in efficient Julia
+.top[# Efficient RANSAC in efficient Julia]
 
+.bottom[.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/juliacon2020-banner.png" width="850">]]
 
 ---
 
