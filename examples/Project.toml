@@ -1,0 +1,8 @@
+[deps]
+FileIO = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
+JuliaCon2020RANSAC = "27c4038b-5bc6-4584-8d0a-aeed953779f6"
+Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a"
+MeshIO = "7269a6da-0436-5bbc-96c2-40638cbb6118"
+RANSAC = "d6bc97e0-a563-11e9-1861-c573f65f3bc3"
+RANSACVisualizer = "d8b64869-c60f-5359-ae4c-f9741940db4e"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
