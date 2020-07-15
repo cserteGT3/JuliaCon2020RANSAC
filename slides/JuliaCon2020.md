@@ -33,7 +33,7 @@ To the best of my knowledge, general implementations have been published only in
 ### Agenda
 
 1. Algorithm introduction
-2. RANSAC.jl demo
+2. `RANSAC.jl` & `RANSACVisualier.jl` demo
 3. Extensibility demo
 4. Future plans
 
@@ -64,7 +64,7 @@ This is already a digital representation, but we want to describe its structure 
 
 ### Goal
 
-recognize primitive shapes: planes, spheres, cylinders, cones, tori
+Recognize primitive shapes: planes, spheres, cylinders, cones, tori
 
 ???
 One way to acquire a such representation is to identify primitive shapes in the point cloud, such as planes, spheres, etc.
@@ -74,8 +74,8 @@ The efficient RANSAC algorithm offers a fast solution for this problem.
 
 ### Algorithm
 
-- input: point cloud with surface normals
-- output: detected shapes and corresponding vertices
+- Input: point cloud with surface normals
+- Output: detected shapes and corresponding vertices
 
 ???
 Input of the algorithm is a point cloud with surface normals and the output is a set of primitive shapes with the corresponding points.
@@ -88,10 +88,10 @@ So our iterative algorithm looks like the following:
 
 ### Iteration
 
-1. sampling
-2. fitting
-3. scoring
-4. extraction (refitting)
+1. Sampling
+2. Fitting
+3. Scoring
+4. Extraction (refitting)
 
 ???
 In every iteration, we sample 3 point-normal pairs and try to fit all the primitives to those pairs. We discard the invalid candidates and collect the valid ones.
@@ -150,11 +150,11 @@ Result:
 (iteration = (drawN = 3, minsubsetN = 15, prob_det = 0.9,
 shape_types = UnionAll[FittedPlane, FittedCone, FittedCylinder, FittedSphere],
 τ = 50, itermax = 100000, extract_s = :nofminset, terminate_s = :nofminset),
-common = (collin_threshold = 0.2, parallelthrdeg = 1.0),
-plane = (ϵ = 0.05, α = 0.17453292519943295),
-cone = (ϵ = 0.05, α = 0.17453292519943295, minconeopang = 0.03490658503988659),
-cylinder = (ϵ = 0.05, α = 0.17453292519943295),
-sphere = (ϵ = 0.05, α = 0.17453292519943295, sphere_par = 0.02))
+common = (collin_threshold = 0.2, parallelthrdeg = 1),
+plane = (ϵ = 0.05, α = 0.175),
+cone = (ϵ = 0.05, α = 0.175, minconeopang = 0.0349),
+cylinder = (ϵ = 0.05, α = 0.175),
+sphere = (ϵ = 0.05, α = 0.175, sphere_par = 0.02))
 ```
 ???
 Then we construct a ransac cloud that wraps the point cloud and other variables as well.
@@ -173,12 +173,12 @@ Result:
 ```julia
 24-element Array{ExtractedShape,1}:
  Cand: (plane), 2205 ps
- Cand: (cylinder, R: 1.101515), 738 ps
- Cand: (cylinder, R: 2.2075706), 625 ps
+ Cand: (cylinder, R: 1.102), 738 ps
+ Cand: (cylinder, R: 2.208), 625 ps
  ⋮
- Cand: (sphere, R: 15.193572), 34 ps
- Cand: (cone, ω: 0.64627165), 60 ps
- Cand: (sphere, R: 1.9352517), 27 ps
+ Cand: (sphere, R: 15.194), 34 ps
+ Cand: (cone, ω: 0.646), 60 ps
+ Cand: (sphere, R: 1.935), 27 ps
 ```
 
 ???
@@ -269,20 +269,22 @@ As in any scientific computing task, we need parameters, thresholds, etc. to fin
 --
 
 ```julia
+julia> using RANSAC
+
 julia> p = ransacparameters([FittedPlane])
 (iteration = (drawN = 3, minsubsetN = 15, prob_det = 0.9, shape_types = UnionAll[FittedPlane], τ = 900,
 itermax = 1000, extract_s = :nofminset, terminate_s = :nofminset),
-common = (collin_threshold = 0.2, parallelthrdeg = 1.0), plane = (ϵ = 0.3, α = 0.08726646259971647))
+common = (collin_threshold = 0.2, parallelthrdeg = 1), plane = (ϵ = 0.3, α = 0.0873))
 
 julia> p = ransacparameters(p, iteration=(prob_det=0.99,))
 (iteration = (drawN = 3, minsubsetN = 15, prob_det = 0.99, shape_types = UnionAll[FittedPlane], τ = 900,
 itermax = 1000, extract_s = :nofminset, terminate_s = :nofminset),
-common = (collin_threshold = 0.2, parallelthrdeg = 1.0), plane = (ϵ = 0.3, α = 0.08726646259971647))
+common = (collin_threshold = 0.2, parallelthrdeg = 1), plane = (ϵ = 0.3, α = 0.0873))
 
-julia> p = ransacparameters(p, plane=(ϵ=1,), newshape=(ϵ=0.01, param1="typeA", param2=42,))
-(iteration = (drawN = 3, minsubsetN = 15, prob_det = 0.99, shape_types = UnionAll[FittedPlane],
-τ = 900, itermax = 1000, extract_s = :nofminset, terminate_s = :nofminset),
-common = (collin_threshold = 0.2, parallelthrdeg = 1.0), plane = (ϵ = 1, α = 0.08726646259971647),
+julia> p = ransacparameters(p, newshape=(ϵ=0.01, param1="typeA", param2=42,))
+(iteration = (drawN = 3, minsubsetN = 15, prob_det = 0.99, shape_types = UnionAll[FittedPlane], τ = 900,
+itermax = 1000, extract_s = :nofminset, terminate_s = :nofminset),
+common = (collin_threshold = 0.2, parallelthrdeg = 1), plane = (ϵ = 0.3, α = 0.0873),
 newshape = (ϵ = 0.01, param1 = "typeA", param2 = 42))
 ```
 
@@ -341,11 +343,11 @@ And finally a few words of what I am planning for the future:
 
 --
 
-- torus primitive
-- proper API in RANSACVisualizer.jl
-- performance optmizations
-- multi-threading
-- investigate further RANSAC variants (GlobFit, multiBaySAC, etc.)
+- Torus primitive
+- Proper API in `RANSACVisualizer.jl`
+- Performance optmizations
+- Multi-threading
+- Investigate further RANSAC variants (GlobFit, multiBaySAC, etc.)
 
 ???
 The torus primitive is still not implemented, and a proper API is needed for the RANSACVisualizer package
