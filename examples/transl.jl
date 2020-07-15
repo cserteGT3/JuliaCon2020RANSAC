@@ -4,6 +4,7 @@ using StaticArrays
 using FileIO
 
 using RANSACVisualizer
+using Makie
 
 fname = joinpath(@__DIR__, "models", "furcsa32k.obj")
 
@@ -20,8 +21,10 @@ iterp = (minsubsetN=15, itermax=10000, τ=1200, prob_det=0.99,)
 params = ransacparameters(defpars, iteration=iterp, plane=planep, sphere=spherep, cylinder=cylinderp, cone=conep,)
 
 extr2, t = ransac(pc, params, true; reset_rand=true)
-showshapes(pc, extr2)
-showbytype(pc, extr2)
+showshapes(pc, extr2, show_axis = false)
+sc = showbytype(pc, extr2, show_axis = false)
+sc.center = false
+save("no_transl.png", sc)
 
 ## With translational
 defpars = ransacparameters([FittedSphere, FittedPlane, FittedCylinder, FittedTranslational])
@@ -32,3 +35,6 @@ params = ransacparameters(defpars, iteration=iterp, plane=planep, sphere=spherep
 extr, t = ransac(pc, params, true; reset_rand=true)
 
 showshapes(pc, extr)
+sc2 = showbytype(pc, extr, show_axis = false)
+sc2.center = false
+save("transl.png", sc2)
