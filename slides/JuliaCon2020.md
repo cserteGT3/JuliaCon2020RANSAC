@@ -22,14 +22,16 @@ Institute for Computer Science and Control (SZTAKI) - Budapest, Hungary
 GitHub:  cserteGT3
 ]
 
----
+--
 
-# Agenda
+### Agenda
 
 1. Algorithm introduction
 2. RANSAC.jl demo
 3. Extensibility demo
 4. Future plans
+
+.footnote[Talk materials: [github.com/cserteGT3/JuliaCon2020RANSAC](https://github.com/cserteGT3/JuliaCon2020RANSAC)]
 
 ---
 # Digital shape reconstruction
@@ -42,12 +44,20 @@ GitHub:  cserteGT3
 
 # Efficient RANSAC
 
+### Goal
+
+recognize primitive shapes: planes, spheres, cylinders, cones, tori
+
+--
+
+### Algorithm
+
 - input: point cloud with surface normals
 - output: detected shapes and corresponding vertices
 
 --
 
-## Iteration
+### Iteration
 
 1. sampling
 2. fitting
@@ -57,6 +67,8 @@ GitHub:  cserteGT3
 ---
 
 # Demo
+
+--
 
 ```julia
 using FileIO
@@ -162,6 +174,8 @@ Result:
 
 # Extensibility
 
+--
+
 - `MyShape <: FittedShape`
 - `fit()`
 - `score()`
@@ -176,6 +190,8 @@ Result:
 # Extensibility demo
 
 ## Parameters
+
+--
 
 ```julia
 julia> p = ransacparameters([FittedPlane])
@@ -201,6 +217,8 @@ newshape = (ϵ = 0.01, param1 = "typeA", param2 = 42))
 
 ## Translational surface
 
+--
+
 .center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/m5_combined.png" width="600">]
 
 ---
@@ -215,8 +233,10 @@ newshape = (ϵ = 0.01, param1 = "typeA", param2 = 42))
 
 # Future plans
 
+- torus primitive
 - proper API in RANSACVisualizer.jl
 - performance optmizations
+- multi-threading
 - investigate further RANSAC variants (GlobFit, multiBaySAC, etc.)
 
 ---
