@@ -4,7 +4,7 @@ count: false
 
 .top[# Efficient RANSAC in efficient Julia]
 
-.bottom[.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/juliacon2020-banner.png" width="850">]]
+.bottom[.center[<img src="assets/juliacon2020-banner.png" width="850">]]
 
 ---
 
@@ -36,7 +36,7 @@ GitHub:  cserteGT3
 ---
 # Digital shape reconstruction
 
-.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/General-RE-framework.png" width="550">]
+.center[<img src="assets/General-RE-framework.png" width="550">]
 
 .left[.footnote[[Image source](https://www.researchgate.net/publication/321116176_Reverse_engineering_modeling_methods_and_tools_a_survey)]]
 
@@ -225,7 +225,7 @@ julia> newshape
 
 --
 
-.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/m5_combined.png" width="600">]
+.center[<img src="assets/m5_combined.png" width="600">]
 
 ---
 
@@ -233,7 +233,7 @@ julia> newshape
 
 ### Translational surface
 
-.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/transl_comparison2.png" width="700">]
+.center[<img src="assets/transl_comparison2.png" width="700">]
 
 ---
 count: false
@@ -242,7 +242,7 @@ count: false
 
 ### Translational surface
 
-.center[<img src="https://github.com/cserteGT3/JuliaCon2020RANSAC/raw/master/slides/images/transl_comparison.png" width="700">]
+.center[<img src="assets/transl_comparison.png" width="700">]
 
 ---
 
