@@ -19,13 +19,11 @@ export  makeslides,
         openslides
 
 
-export  SLIDE_FILE,
-        SLIDE_FOLDER
+export  SLIDE_FOLDER
 
 const SLIDE_FOLDER = joinpath(dirname(@__DIR__), "slides")
-const SLIDE_FILE = joinpath(SLIDE_FOLDER, "JuliaCon2020.md")
 
-makeslides() = Remark.slideshow(SLIDE_FILE, SLIDE_FOLDER, options=Dict("ratio"=>"16:9"),
+makeslides() = Remark.slideshow(SLIDE_FOLDER, options=Dict("ratio"=>"16:9"),
     title = "Efficient RANSAC in efficient Julia", documenter=false)
 
 openslides() = Remark.open(SLIDE_FOLDER)
