@@ -31,6 +31,8 @@ makeslides()
 openslides()
 ```
 
+You can also find the compiled presentation in the `slides/build` folder.
+
 ## Test the examples
 
 You can also find a few examples in the `examples/` folder, I suggest to try them out.
